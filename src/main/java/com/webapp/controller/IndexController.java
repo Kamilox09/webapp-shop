@@ -1,4 +1,4 @@
-package com.webapp.Controller;
+package com.webapp.controller;
 
 
 import org.springframework.stereotype.Controller;
