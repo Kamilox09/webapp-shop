@@ -9,14 +9,14 @@ import java.util.List;
 @Table(name="PRODUCT")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private long productId;
 
     @Column(name = "NAME",nullable=false)
     @Size(min=1,max=64)
     private String name;
 
-    @Column(name="DESCRIPTION",nullable = false,columnDefinition = "LONGVARCHAR", length = 10000)
+    @Column(name="DESCRIPTION",nullable = false,columnDefinition = "LONG VARCHAR", length = 10000)
     @Size(min=1,max=10000)
     private String description;
 

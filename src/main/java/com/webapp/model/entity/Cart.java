@@ -9,7 +9,7 @@ import java.util.List;
 @Table(name="CART")
 public class Cart {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private long cartId;
 
     @Column(name="TOTAL_PRICE")

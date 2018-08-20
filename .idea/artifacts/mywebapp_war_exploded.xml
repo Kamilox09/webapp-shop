@@ -50,7 +50,6 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:5.0.7.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.0.7.RELEASE" />
           <element id="library" level="project" name="Maven: javax.validation:validation-api:2.0.1.Final" />
-          <element id="library" level="project" name="Maven: org.hibernate.validator:hibernate-validator:6.0.12.Final" />
         </element>
       </element>
       <element id="directory" name="META-INF">

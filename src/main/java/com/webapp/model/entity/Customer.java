@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name="CUSTOMER")
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private long customerId;
 
     @Column(name="LOGIN",unique = true,nullable = false)

@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 @Table(name = "ADDRESS")
 public class Address {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private long addressId;
 
     @Column(name="CITY")
@@ -25,11 +25,11 @@ public class Address {
     @Column(name="LOCAL_NUMBER")
     private String localNumber;
 
-    @Column(name="FROM")
-    private Timestamp from;
+    @Column(name="FROM_DATE")
+    private Timestamp fromDate;
 
-    @Column(name="TO")
-    private Timestamp to;
+    @Column(name="TO_DATE")
+    private Timestamp toDate;
 
     @ManyToOne
     private Customer customer;
@@ -82,20 +82,20 @@ public class Address {
         this.localNumber = localNumber;
     }
 
-    public Timestamp getFrom() {
-        return from;
+    public Timestamp getFromDate() {
+        return fromDate;
     }
 
-    public void setFrom(Timestamp from) {
-        this.from = from;
+    public void setFromDate(Timestamp fromDate) {
+        this.fromDate = fromDate;
     }
 
-    public Timestamp getTo() {
-        return to;
+    public Timestamp getToDate() {
+        return toDate;
     }
 
-    public void setTo(Timestamp to) {
-        this.to = to;
+    public void setToDate(Timestamp toDate) {
+        this.toDate = toDate;
     }
 
     public Customer getCustomer() {

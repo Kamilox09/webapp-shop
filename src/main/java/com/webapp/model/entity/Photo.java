@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 @Table(name="PHOTO")
 public class Photo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private long photoId;
 
     @Size(min=1,max=64)
