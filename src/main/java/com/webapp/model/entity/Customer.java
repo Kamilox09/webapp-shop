@@ -42,8 +42,8 @@ public class Customer {
     @Column(name="PHONE_NUMBER")
     private String phoneNumber;
 
-    @Column(name="TYPE", nullable = false)
-    private boolean type;
+    @Column(name="ROLE", nullable = false)
+    private String role;
 
     @OneToMany(mappedBy = "customer")
     private List<Cart> cartList;
@@ -131,12 +131,12 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public boolean isType() {
-        return type;
+    public String isType() {
+        return role;
     }
 
-    public void setType(boolean type) {
-        this.type = type;
+    public void setType(String type) {
+        this.role = type;
     }
 
     public List<Cart> getCartList() {
