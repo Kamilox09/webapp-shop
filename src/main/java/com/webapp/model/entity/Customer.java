@@ -131,11 +131,11 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public String isType() {
+    public String getRole() {
         return role;
     }
 
-    public void setType(String type) {
+    public void setRole(String type) {
         this.role = type;
     }
 

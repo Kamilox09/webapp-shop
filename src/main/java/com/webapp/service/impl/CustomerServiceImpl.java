@@ -4,7 +4,11 @@ import com.webapp.dao.CustomerDao;
 import com.webapp.model.entity.Customer;
 import com.webapp.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service("customerService")
+@Transactional
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerDao customerDao;
