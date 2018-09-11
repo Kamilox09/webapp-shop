@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{task/layout}"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>mywebapp</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/main.css}"/>
+    <script type="text/javascript" th:src="@{/resources/js/angular/angular.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/js/app.js}"></script>
+    <script type="text/javascript"  th:src="@{/resources/js/controller/LoginController.js}"></script>
+</head>
+<body ng-app="myApp">
+<div layout:fragment="content">
+    <div class="container" ng-controller="loginCtrl">
+        <div class="grayLogin">
+        <table class="littleBorder">
+            <tr>
+                <td class="padding5px">
+                    <h3><strong>Logowanie</strong></h3>
+                    <form>
+                        <label for="log">Login:</label>
+                        <input type="text" id="log" ng-model="credentials.username"/>
+                        <br>
+                        <label for="pass">Has&lstrok;o:</label>
+                        <input type="password" id="pass" ng-model="credentials.password"/>
+                        <br>
+                        <div align="center">
+                        <a href="#" ng-click="sendCredentials(credentials)">
+                            <span class="glyphicon glyphicon-off"/>Zaloguj </a>
+                        </div>
+
+                    </form>
+                </td>
+            </tr>
+        </table>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
