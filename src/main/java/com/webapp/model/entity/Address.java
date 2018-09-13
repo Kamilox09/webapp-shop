@@ -19,9 +19,6 @@ public class Address {
     @Column(name="ZIP_CODE")
     private String zipCode;
 
-    @Column(name="HOUSE_NUMBER")
-    private String houseNumber;
-
     @Column(name="LOCAL_NUMBER")
     private String localNumber;
 
@@ -64,14 +61,6 @@ public class Address {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
-    }
-
-    public String getHouseNumber() {
-        return houseNumber;
-    }
-
-    public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
     }
 
     public String getLocalNumber() {
