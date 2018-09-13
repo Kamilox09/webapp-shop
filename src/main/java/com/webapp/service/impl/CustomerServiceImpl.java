@@ -15,6 +15,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer getCustomerByUsername(String username) {
-        return customerDao.getCustomerByUsername(username);
+        Customer customer = customerDao.getCustomerByUsername(username);
+        if(customer==null)
+            throw new RuntimeException("Not found");
+        return customer;
     }
 }

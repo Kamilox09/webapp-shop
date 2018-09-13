@@ -1,6 +1,8 @@
 package com.webapp.configuration;
 
 
+import com.webapp.security.AuthFailure;
+import com.webapp.security.AuthSuccess;
 import com.webapp.security.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,7 +11,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 import javax.servlet.*;
 import java.io.IOException;
@@ -21,33 +24,44 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailServiceImpl userService;
 
+    @Autowired
+    private AuthFailure authFailure;
+
+    @Autowired
+    private AuthSuccess authSuccess;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService);
+        auth.userDetailsService(userService).passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
 
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
             .authorizeRequests()
                 .antMatchers("/resources/**","/webjars/**")
                 .permitAll()
-                .antMatchers("/login")
-                .anonymous()
+                .antMatchers("/login**").permitAll()
+               // .anonymous()
                 .anyRequest()
                 .authenticated()
             .and()
             .formLogin()
-            .loginPage("/login").permitAll()
+            .loginPage("/login")
             .loginProcessingUrl("/login")
-            .defaultSuccessUrl("/")
-            .failureUrl("/login?error=true")
+                .successHandler(authSuccess)
+            //.defaultSuccessUrl("/",true)
+            //.failureUrl("/login?error=true")
+                .failureHandler(authFailure)
             .usernameParameter("username")
             .passwordParameter("password")
             .and()
-            .logout().logoutSuccessUrl("/login.html");
+            .logout().logoutSuccessUrl("/login.html")
+        .and()
+        .csrf().disable();
+
+
 //        http.authorizeRequests().antMatchers("/css/**", "/js/**", "/images/**").permitAll()
 //        .anyRequest().permitAll();
        // http.authorizeRequests().antMatchers("/resources/**").permitAll();

@@ -20,10 +20,11 @@ public class UserDetailServiceImpl implements UserDetailsService {
         Customer customer;
         try{
             customer = customerService.getCustomerByUsername(username);
+            return new UserDetailsImpl(customer);
         }catch(RuntimeException e){
             throw new UsernameNotFoundException("User not found");
         }
 
-        return new UserDetailsImpl(customer);
+
     }
 }

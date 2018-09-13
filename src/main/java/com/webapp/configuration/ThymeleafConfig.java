@@ -26,6 +26,7 @@ public class ThymeleafConfig implements ServletContextAware {
         resolver.setSuffix(".html");
         resolver.setTemplateMode("HTML5");
         resolver.setCacheable(false);
+        resolver.setCharacterEncoding("UTF-16");
         return resolver;
     }
 

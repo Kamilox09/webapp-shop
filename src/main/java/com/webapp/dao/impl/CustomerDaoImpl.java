@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CustomerDaoImpl extends AbstractDao<Customer> implements CustomerDao {
     @Override
     public Customer getCustomerByUsername(String username) {
-        Query query = getSession().createQuery("from Customer where USERNAME =:username");
+        Query query = getSession().createQuery("from Customer where login =:username");
         query.setParameter("username",username);
         return (Customer)query.uniqueResult();
     }
