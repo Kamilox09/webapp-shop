@@ -23,3 +23,12 @@
     padding: 5px;
 }
 
+.redText{
+    color: red;
+    float: right;
+    font-size: large;
+}
+
+.rightFloat{
+    float: right;
+}

@@ -18,12 +18,12 @@ myApp.controller('loginCtrl', function($scope,$http){
     var successCallback = function(response){
         $scope.reset();
         window.location='/mywebapp/';
-    }
+    };
 
     var failureCallback = function(){
         $scope.reset();
         $scope.setError('Nieprawidłowy login lub hasło');
-    }
+    };
 
     $scope.reset = function(){
         $scope.error=false;
