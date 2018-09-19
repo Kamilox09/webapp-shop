@@ -21,6 +21,7 @@ public class CustomerAddressDTO {
     private String nip;
     private String regon;
     private String email;
+    private String role;
     private long addressId;
     private String city;
     private String zipCode;
@@ -37,6 +38,7 @@ public class CustomerAddressDTO {
         customer.setNip(nip);
         customer.setRegon(regon);
         customer.setEmail(email);
+        customer.setRole("USER");
         Address address = new Address();
         address.setCity(city);
         address.setZipCode(zipCode);
@@ -60,6 +62,7 @@ public class CustomerAddressDTO {
         nip=customer.getNip();
         regon=customer.getRegon();
         email=customer.getEmail();
+        role=customer.getRole();
         Address address = customer.getAddressList().get(0);
         addressId=address.getAddressId();
         city=address.getCity();
