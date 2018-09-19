@@ -1,6 +1,7 @@
 package com.webapp.service.impl;
 
 import com.webapp.dao.CustomerDao;
+import com.webapp.model.CustomerAddressDTO;
 import com.webapp.model.entity.Customer;
 import com.webapp.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,14 @@ public class CustomerServiceImpl implements CustomerService {
         if(customer==null)
             throw new RuntimeException("Not found");
         return customer;
+    }
+
+    @Override
+    public CustomerAddressDTO addNewCustomer( CustomerAddressDTO customerToAdd) {
+        Customer customer = customerDao.getCustomerByUsername(customerToAdd.getLogin());
+        if(customer!=null)
+            return null;
+        return new CustomerAddressDTO(customerDao.addNewCustomer(customerToAdd.getCustomerWithAddress()));
+
     }
 }

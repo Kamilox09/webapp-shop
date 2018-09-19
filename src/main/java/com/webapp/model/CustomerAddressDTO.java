@@ -1,14 +1,18 @@
 package com.webapp.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.webapp.model.entity.Address;
 import com.webapp.model.entity.Customer;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerAddressDTO {
 
+    private long customerId;
     private String login;
     private String password;
     private String name;
@@ -17,6 +21,7 @@ public class CustomerAddressDTO {
     private String nip;
     private String regon;
     private String email;
+    private long addressId;
     private String city;
     private String zipCode;
     private String street;
@@ -37,10 +42,47 @@ public class CustomerAddressDTO {
         address.setZipCode(zipCode);
         address.setStreet(street);
         address.setLocalNumber(localNumber);
+        address.setFromDate(new Timestamp(System.currentTimeMillis()));
         List<Address> addressList = new ArrayList<>();
         addressList.add(address);
         customer.setAddressList(addressList);
         return customer;
+    }
+
+    public CustomerAddressDTO(){}
+
+    public CustomerAddressDTO(Customer customer){
+        customerId=customer.getCustomerId();
+        login=customer.getLogin();
+        name=customer.getName();
+        surname=customer.getSurname();
+        company=customer.getCompany();
+        nip=customer.getNip();
+        regon=customer.getRegon();
+        email=customer.getEmail();
+        Address address = customer.getAddressList().get(0);
+        addressId=address.getAddressId();
+        city=address.getCity();
+        zipCode=address.getZipCode();
+        street=address.getStreet();
+        localNumber=address.getLocalNumber();
+
+    }
+
+    public long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
+    }
+
+    public long getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(long addressId) {
+        this.addressId = addressId;
     }
 
     public String getLogin() {
@@ -51,10 +93,12 @@ public class CustomerAddressDTO {
         this.login = login;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }

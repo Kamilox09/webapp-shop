@@ -4,4 +4,6 @@ import com.webapp.model.entity.Customer;
 
 public interface CustomerDao {
     Customer getCustomerByUsername(String username);
+    Customer addNewCustomer(Customer customer);
+
 }

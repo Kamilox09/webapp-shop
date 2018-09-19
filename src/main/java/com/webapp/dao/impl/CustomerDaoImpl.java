@@ -15,4 +15,10 @@ public class CustomerDaoImpl extends AbstractDao<Customer> implements CustomerDa
         query.setParameter("username",username);
         return (Customer)query.uniqueResult();
     }
+
+    @Override
+    public Customer addNewCustomer(Customer customer) {
+        create(customer);
+        return customer;
+    }
 }
