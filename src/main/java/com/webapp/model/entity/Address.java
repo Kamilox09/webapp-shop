@@ -1,5 +1,7 @@
 package com.webapp.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -28,6 +30,7 @@ public class Address {
     @Column(name="TO_DATE")
     private Timestamp toDate;
 
+    @JsonBackReference
     @ManyToOne
     private Customer customer;
 

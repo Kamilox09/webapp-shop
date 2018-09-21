@@ -1,7 +1,10 @@
 package com.webapp.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -48,8 +51,17 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private List<Cart> cartList;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "customer")
     private List<Address> addressList;
+
+    public void addAddress(Address address){
+        if(addressList==null)
+            addressList=new ArrayList<Address>();
+        addressList.add(address);
+        address.setCustomer(this);
+
+    }
 
     public long getCustomerId() {
         return customerId;

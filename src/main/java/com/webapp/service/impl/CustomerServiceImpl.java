@@ -2,7 +2,9 @@ package com.webapp.service.impl;
 
 import com.webapp.dao.CustomerDao;
 import com.webapp.model.CustomerAddressDTO;
+import com.webapp.model.entity.Address;
 import com.webapp.model.entity.Customer;
+import com.webapp.service.AddressService;
 import com.webapp.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerDao customerDao;
+
+    @Autowired
+    private AddressService addressService;
 
     @Override
     public Customer getCustomerByUsername(String username) {
@@ -27,7 +32,13 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = customerDao.getCustomerByUsername(customerToAdd.getLogin());
         if(customer!=null)
             return null;
-        return new CustomerAddressDTO(customerDao.addNewCustomer(customerToAdd.getCustomerWithAddress()));
+        customer=customerToAdd.getCustomerWithAddress();
+        Address address = customerToAdd.getAddress();
+        customer=customerDao.addNewCustomer(customer);
+        address.setCustomer(customer);
+        address=addressService.addNewAddress(address);
+
+        return new CustomerAddressDTO(customer,address);
 
     }
 }

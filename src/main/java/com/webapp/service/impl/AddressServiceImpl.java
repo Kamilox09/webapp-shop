@@ -1,5 +1,6 @@
 package com.webapp.service.impl;
 
+import com.webapp.dao.AddressDao;
 import com.webapp.model.entity.Address;
 import com.webapp.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class AddressServiceImpl implements AddressService {
     @Autowired
-    private AddressService addressService;
+    private AddressDao addressDao;
 
     @Override
     public Address addNewAddress(Address address) {
-        return addressService.addNewAddress(address);
+        return addressDao.addNewAddress(address);
 
     }
 }

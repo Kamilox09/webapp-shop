@@ -39,21 +39,32 @@ public class CustomerAddressDTO {
         customer.setRegon(regon);
         customer.setEmail(email);
         customer.setRole("USER");
+       // Address address = new Address();
+       // address.setCity(city);
+      //  address.setZipCode(zipCode);
+      //  address.setStreet(street);
+       // address.setLocalNumber(localNumber);
+       // address.setFromDate(new Timestamp(System.currentTimeMillis()));
+       // List<Address> addressList = new ArrayList<>();
+       // addressList.add(address);
+       // customer.addAddress(address);
+        return customer;
+    }
+
+    public Address getAddress(){
         Address address = new Address();
         address.setCity(city);
         address.setZipCode(zipCode);
         address.setStreet(street);
         address.setLocalNumber(localNumber);
         address.setFromDate(new Timestamp(System.currentTimeMillis()));
-        List<Address> addressList = new ArrayList<>();
-        addressList.add(address);
-        customer.setAddressList(addressList);
-        return customer;
+        address.setCustomer(this.getCustomerWithAddress());
+        return address;
     }
 
     public CustomerAddressDTO(){}
 
-    public CustomerAddressDTO(Customer customer){
+    public CustomerAddressDTO(Customer customer, Address address){
         customerId=customer.getCustomerId();
         login=customer.getLogin();
         name=customer.getName();
@@ -63,7 +74,7 @@ public class CustomerAddressDTO {
         regon=customer.getRegon();
         email=customer.getEmail();
         role=customer.getRole();
-        Address address = customer.getAddressList().get(0);
+        //Address address = customer.getAddressList().get(0);
         addressId=address.getAddressId();
         city=address.getCity();
         zipCode=address.getZipCode();

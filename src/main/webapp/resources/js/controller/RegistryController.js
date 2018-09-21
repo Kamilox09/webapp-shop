@@ -16,6 +16,7 @@ myApp.controller('registryCtrl',function($scope,$http){
     $scope.acc.zipCode='';
     $scope.acc.street='';
     $scope.acc.localNumber='';
+    $scope.usernameExist=false;
 
     $scope.sendForm = function(accountDetails){
         checkPasswords();
@@ -24,8 +25,13 @@ myApp.controller('registryCtrl',function($scope,$http){
                 .then(function (response) {
                     $scope.reset();
                     window.location='/mywebapp/login';
-                });
+                },
+                    failureCallback());
         }
+    };
+
+    var failureCallback = function(){
+        $scope.usernameExist=true;
     };
 
     var checkPasswords = function () {
@@ -54,5 +60,6 @@ myApp.controller('registryCtrl',function($scope,$http){
         $scope.acc.zipCode='';
         $scope.acc.street='';
         $scope.acc.localNumber='';
+        $scope.usernameExist=false;
     };
     });
