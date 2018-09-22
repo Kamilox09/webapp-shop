@@ -37,6 +37,7 @@ public class ManufacturerController {
     @RequestMapping(value = "/manufacturer/all",method = RequestMethod.GET)
     public @ResponseBody List<Manufacturer>
             getAllManufacturers(){
-                return manufacturerService.getAllManufacturers();
+                List<Manufacturer> list = manufacturerService.getAllManufacturers();
+                return list;
     }
 }

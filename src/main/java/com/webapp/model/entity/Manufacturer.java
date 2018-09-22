@@ -1,6 +1,8 @@
 package com.webapp.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -16,6 +18,7 @@ public class Manufacturer {
     @Size(min=1)
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "manufacturer")
     private List<Product> productList;
 
