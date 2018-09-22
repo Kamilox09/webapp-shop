@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service("manufacturerService")
 @Transactional
 public class ManufacturerServiceImpl implements ManufacturerService {
@@ -19,5 +21,10 @@ public class ManufacturerServiceImpl implements ManufacturerService {
         if(check!=null)
             return null;
         return manufacturerDao.create(manufacturer);
+    }
+
+    @Override
+    public List<Manufacturer> getAllManufacturers() {
+        return manufacturerDao.getAll();
     }
 }

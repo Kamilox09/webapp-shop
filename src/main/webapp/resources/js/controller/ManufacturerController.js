@@ -17,7 +17,7 @@ myApp.controller('manufacturerCtrl',function($scope,$http){
         $scope.obj={};
         $scope.obj.name='';
         $scope.error=false;
-    }
+    };
 
     var failureCallback = function(){
         $scope.error=true;

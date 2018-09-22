@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -31,5 +32,11 @@ public class ManufacturerController {
             if(returned==null)
                 response.setStatus(HttpServletResponse.SC_CONFLICT);
             return returned;
+    }
+
+    @RequestMapping(value = "/manufacturer/all",method = RequestMethod.GET)
+    public @ResponseBody List<Manufacturer>
+            getAllManufacturers(){
+                return manufacturerService.getAllManufacturers();
     }
 }
