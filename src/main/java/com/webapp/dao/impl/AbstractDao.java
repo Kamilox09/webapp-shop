@@ -23,8 +23,9 @@ public abstract class AbstractDao<T> implements IAbstractDao<T> {
         this.entityClass=(Class<T>)((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
-    public void create(T entity){
+    public T create(T entity){
         getSession().save(entity);
+        return entity;
     }
 
     public void update(T entity){

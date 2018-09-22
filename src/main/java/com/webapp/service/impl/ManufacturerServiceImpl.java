@@ -1,0 +1,23 @@
+package com.webapp.service.impl;
+
+import com.webapp.dao.ManufacturerDao;
+import com.webapp.model.entity.Manufacturer;
+import com.webapp.service.ManufacturerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service("manufacturerService")
+@Transactional
+public class ManufacturerServiceImpl implements ManufacturerService {
+    @Autowired
+    private ManufacturerDao manufacturerDao;
+
+    @Override
+    public Manufacturer addManufacturer(Manufacturer manufacturer) {
+        Manufacturer check = manufacturerDao.getManufacturerByName(manufacturer.getName());
+        if(check!=null)
+            return null;
+        return manufacturerDao.create(manufacturer);
+    }
+}
