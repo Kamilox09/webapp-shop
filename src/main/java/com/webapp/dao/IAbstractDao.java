@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface IAbstractDao<T> {
      T create(T entity);
-     void update(T entity);
+     T update(T entity);
      void delete(T entity);
      T getByKey(long id);
      List<T> getAll();

@@ -49,5 +49,14 @@ public class ManufacturerController {
             return manufacturerService.getManufacturerById(manufacturerId);
     }
 
+    @RequestMapping(value="/manufacturer",method = RequestMethod.PUT)
+    public @ResponseBody Manufacturer
+        updateManufacturer(@RequestBody Manufacturer manufacturer, HttpServletResponse response){
+            Manufacturer returned = manufacturerService.updateManufacturer(manufacturer);
+            if(returned==null)
+                response.setStatus(HttpServletResponse.SC_CONFLICT);
+            return returned;
+    }
+
 
 }

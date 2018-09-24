@@ -28,8 +28,9 @@ public abstract class AbstractDao<T> implements IAbstractDao<T> {
         return entity;
     }
 
-    public void update(T entity){
+    public T update(T entity){
         getSession().update(entity);
+        return entity;
     }
 
     public void delete(T entity){

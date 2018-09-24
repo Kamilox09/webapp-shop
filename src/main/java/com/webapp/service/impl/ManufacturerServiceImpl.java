@@ -32,4 +32,12 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     public Manufacturer getManufacturerById(Long id) {
         return manufacturerDao.getByKey(id);
     }
+
+    @Override
+    public Manufacturer updateManufacturer(Manufacturer manufacturer) {
+        Manufacturer check = manufacturerDao.getManufacturerByName(manufacturer.getName());
+        if(check!=null)
+            return null;
+        return manufacturerDao.update(manufacturer);
+    }
 }

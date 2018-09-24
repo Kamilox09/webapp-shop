@@ -5,6 +5,7 @@ myApp.controller('manufacturerCtrl',function($scope,$http){
     $scope.error=false;
     $scope.manufacturers={};
     $scope.old={};
+    $scope.idToDel='';
 
 
 
@@ -15,6 +16,10 @@ myApp.controller('manufacturerCtrl',function($scope,$http){
                 window.location.reload();
             },
                 failureCallback())
+    };
+
+    $scope.setIdToDel = function(id){
+        $scope.idToDel=id;
     };
 
     $scope.editManufacturer = function(obj){
