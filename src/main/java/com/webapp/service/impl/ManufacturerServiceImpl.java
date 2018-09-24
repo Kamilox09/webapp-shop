@@ -40,4 +40,9 @@ public class ManufacturerServiceImpl implements ManufacturerService {
             return null;
         return manufacturerDao.update(manufacturer);
     }
+
+    @Override
+    public void deleteManufacturerById(long id) {
+        manufacturerDao.deleteByKey(id);
+    }
 }

@@ -9,4 +9,5 @@ public interface ManufacturerService {
     List<Manufacturer> getAllManufacturers();
     Manufacturer getManufacturerById(Long id);
     Manufacturer updateManufacturer(Manufacturer manufacturer);
+    void deleteManufacturerById(long id);
 }

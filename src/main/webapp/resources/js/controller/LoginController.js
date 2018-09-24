@@ -5,7 +5,7 @@ myApp.controller('loginCtrl', function($scope,$http){
     $scope.credentials.username='';
     $scope.credentials.password='';
 
-    $scope.sendCredentials = function(credentials){
+    $scope.sendCredentials = function(credentials){debugger
         var config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
         $http.post('/mywebapp/login',"username="+credentials.username+"&password="+credentials.password,config)
             .then(function successCallback(reponse){

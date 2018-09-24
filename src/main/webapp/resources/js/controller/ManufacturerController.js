@@ -6,6 +6,8 @@ myApp.controller('manufacturerCtrl',function($scope,$http){
     $scope.manufacturers={};
     $scope.old={};
     $scope.del={};
+    $scope.del.manufacturerId='';
+    $scope.del.name='';
 
 
 
@@ -18,8 +20,9 @@ myApp.controller('manufacturerCtrl',function($scope,$http){
                 failureCallback())
     };
 
-    $scope.setObjToDel = function(manufacturer){
-        $scope.del=manufacturer;
+    $scope.setObjToDel = function(id,name){
+        $scope.del.manufacturerId=id;
+        $scope.name=name;
     };
 
     $scope.editManufacturer = function(obj){
@@ -33,7 +36,7 @@ myApp.controller('manufacturerCtrl',function($scope,$http){
     };
 
     $scope.deleteManufacturer = function(){
-        $http.delete('/mywebapp/admin/manufacturer',del)
+        $http.delete('/mywebapp/admin/manufacturer?id='+$scope.del.manufacturerId)
             .then(function(){
                 $scope.reset();
                 window.location.reload();
@@ -64,6 +67,8 @@ myApp.controller('manufacturerCtrl',function($scope,$http){
         $scope.error=false;
         $scope.old={};
         $scope.del={};
+        $scope.del.manufacturerId='';
+        $scope.del.name='';
     };
 
     var failureCallback = function(){
