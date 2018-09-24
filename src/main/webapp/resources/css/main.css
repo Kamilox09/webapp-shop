@@ -20,7 +20,12 @@
     margin-right: 15%;
     padding-top: 60px;
     padding-left: 25%;
-    padding-bottom: 200px;
+    padding-bottom: 60px;
+}
+
+.marginLeftRight{
+    margin-left:25%;
+    margin-right:25%;
 }
 
 .littleBorder {

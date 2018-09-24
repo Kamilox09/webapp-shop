@@ -7,4 +7,5 @@ import java.util.List;
 public interface ManufacturerService {
     Manufacturer addManufacturer(Manufacturer manufacturer);
     List<Manufacturer> getAllManufacturers();
+    Manufacturer getManufacturerById(Long id);
 }

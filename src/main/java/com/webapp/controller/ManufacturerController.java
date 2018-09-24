@@ -5,10 +5,8 @@ import com.webapp.model.entity.Manufacturer;
 import com.webapp.service.ManufacturerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -22,7 +20,7 @@ public class ManufacturerController {
 
     @RequestMapping("/manufacturer")
     public String getManufacturerPage(){
-        return "admin/manufacturer";
+        return "admin/manufacturer/manufacturer";
     }
 
     @RequestMapping(value = "/manufacturer", method = RequestMethod.POST)
@@ -37,7 +35,19 @@ public class ManufacturerController {
     @RequestMapping(value = "/manufacturer/all",method = RequestMethod.GET)
     public @ResponseBody List<Manufacturer>
             getAllManufacturers(){
-                List<Manufacturer> list = manufacturerService.getAllManufacturers();
-                return list;
+                return manufacturerService.getAllManufacturers();
     }
+
+    @RequestMapping(value = "/manufacturer/edit/{id}", method = RequestMethod.GET)
+    public String getEditPage(@PathVariable("id") Long manufacturerId){
+                return "admin/manufacturer/edit";
+    }
+
+    @RequestMapping(value = "/manufacturer/get/{id}",method = RequestMethod.GET)
+    public @ResponseBody Manufacturer
+        getManufacturerById(@PathVariable("id") Long manufacturerId){
+            return manufacturerService.getManufacturerById(manufacturerId);
+    }
+
+
 }

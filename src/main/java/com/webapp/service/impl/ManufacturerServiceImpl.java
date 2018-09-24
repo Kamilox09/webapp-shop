@@ -27,4 +27,9 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     public List<Manufacturer> getAllManufacturers() {
         return manufacturerDao.getAll();
     }
+
+    @Override
+    public Manufacturer getManufacturerById(Long id) {
+        return manufacturerDao.getByKey(id);
+    }
 }
