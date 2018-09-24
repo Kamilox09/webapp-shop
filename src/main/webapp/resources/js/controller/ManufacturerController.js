@@ -5,7 +5,7 @@ myApp.controller('manufacturerCtrl',function($scope,$http){
     $scope.error=false;
     $scope.manufacturers={};
     $scope.old={};
-    $scope.idToDel='';
+    $scope.del={};
 
 
 
@@ -18,8 +18,8 @@ myApp.controller('manufacturerCtrl',function($scope,$http){
                 failureCallback())
     };
 
-    $scope.setIdToDel = function(id){
-        $scope.idToDel=id;
+    $scope.setObjToDel = function(manufacturer){
+        $scope.del=manufacturer;
     };
 
     $scope.editManufacturer = function(obj){
@@ -30,6 +30,14 @@ myApp.controller('manufacturerCtrl',function($scope,$http){
                 window.location='/mywebapp/admin/manufacturer';
             },
                 failureCallback())
+    };
+
+    $scope.deleteManufacturer = function(){
+        $http.delete('/mywebapp/admin/manufacturer',del)
+            .then(function(){
+                $scope.reset();
+                window.location.reload();
+            })
     };
 
     $scope.getAllManufacturers = function(){
@@ -54,6 +62,8 @@ myApp.controller('manufacturerCtrl',function($scope,$http){
         $scope.obj={};
         $scope.obj.name='';
         $scope.error=false;
+        $scope.old={};
+        $scope.del={};
     };
 
     var failureCallback = function(){
