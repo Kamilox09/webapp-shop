@@ -15,8 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class RegistryController {
 
+    private final CustomerService customerService;
+
     @Autowired
-    private CustomerService customerService;
+    public RegistryController(CustomerService customerService){
+        this.customerService=customerService;
+    }
 
     @RequestMapping("/registry")
     public String getRegistryPage(){

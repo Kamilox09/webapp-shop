@@ -13,11 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("customerService")
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
-    @Autowired
-    private CustomerDao customerDao;
+
+    private final CustomerDao customerDao;
+
+    private final AddressService addressService;
 
     @Autowired
-    private AddressService addressService;
+    public CustomerServiceImpl(CustomerDao customerDao, AddressService addressService){
+        this.customerDao=customerDao;
+        this.addressService=addressService;
+    }
 
     @Override
     public Customer getCustomerByUsername(String username) {

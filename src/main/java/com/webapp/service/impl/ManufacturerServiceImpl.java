@@ -12,8 +12,13 @@ import java.util.List;
 @Service("manufacturerService")
 @Transactional
 public class ManufacturerServiceImpl implements ManufacturerService {
+
+    private final ManufacturerDao manufacturerDao;
+
     @Autowired
-    private ManufacturerDao manufacturerDao;
+    public ManufacturerServiceImpl(ManufacturerDao manufacturerDao){
+        this.manufacturerDao=manufacturerDao;
+    }
 
     @Override
     public Manufacturer addManufacturer(Manufacturer manufacturer) {

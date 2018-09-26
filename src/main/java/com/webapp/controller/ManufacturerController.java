@@ -17,8 +17,13 @@ import java.util.List;
 @RequestMapping("/admin")
 public class ManufacturerController {
 
+
+    private final ManufacturerService manufacturerService;
+
     @Autowired
-    private ManufacturerService manufacturerService;
+    public ManufacturerController(ManufacturerService manufacturerService){
+        this.manufacturerService=manufacturerService;
+    }
 
     @RequestMapping("/manufacturer")
     public String getManufacturerPage(){

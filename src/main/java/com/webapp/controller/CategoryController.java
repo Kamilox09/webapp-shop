@@ -15,8 +15,13 @@ import java.util.List;
 @RequestMapping("/admin")
 public class CategoryController {
 
+
+    private final CategoryService categoryService;
+
     @Autowired
-    private CategoryService categoryService;
+    public CategoryController(CategoryService categoryService){
+        this.categoryService=categoryService;
+    }
 
     @RequestMapping("/category")
     public String getCategoryPage(){
