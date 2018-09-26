@@ -1,18 +1,18 @@
 var myApp = angular.module('myApp',[]);
-myApp.controller('manufacturerCtrl',function($scope,$http){
+myApp.controller('categoryCtrl',function($scope,$http){
     $scope.obj={};
     $scope.obj.name='';
     $scope.error=false;
-    $scope.manufacturers={};
+    $scope.categories={};
     $scope.old={};
     $scope.del={};
-    $scope.del.manufacturerId='';
+    $scope.del.categoryId='';
     $scope.del.name='';
 
 
 
-    $scope.addManufacturer = function(obj){
-        $http.post('/mywebapp/admin/manufacturer',obj)
+    $scope.addCategory = function(obj){
+        $http.post('/mywebapp/admin/category',obj)
             .then(function(){
                 $scope.reset();
                 window.location.reload();
@@ -22,41 +22,41 @@ myApp.controller('manufacturerCtrl',function($scope,$http){
     };
 
     $scope.setObjToDel = function(id,name){
-        $scope.del.manufacturerId=id;
+        $scope.del.categoryId=id;
         $scope.del.name=name;
     };
 
-    $scope.editManufacturer = function(obj){
-        $scope.obj.manufacturerId=$scope.old.manufacturerId;
-        $http.put('/mywebapp/admin/manufacturer',obj)
+    $scope.editCategory = function(obj){
+        $scope.obj.categoryId=$scope.old.categoryId;
+        $http.put('/mywebapp/admin/category',obj)
             .then(function(){
                 $scope.reset();
-                window.location='/mywebapp/admin/manufacturer';
+                window.location='/mywebapp/admin/category';
             })
             .catch(function(){
                 failureCallback();
             })
     };
 
-    $scope.deleteManufacturer = function(){
-        $http.delete('/mywebapp/admin/manufacturer?id='+$scope.del.manufacturerId)
+    $scope.deleteCategory = function(){
+        $http.delete('/mywebapp/admin/category?id='+$scope.del.categoryId)
             .then(function(){
                 $scope.reset();
                 window.location.reload();
             })
     };
 
-    $scope.getAllManufacturers = function(){
-        $http.get('/mywebapp/admin/manufacturer/all')
+    $scope.getAllCategories = function(){
+        $http.get('/mywebapp/admin/category/all')
             .then(function(data){
-                $scope.manufacturers=data.data;
+                $scope.categories=data.data;
             })
     };
 
     $scope.getOld = function(){
         var url = window.location.pathname;
         var id= url.substring(url.lastIndexOf('/')+1);
-        $http.get('/mywebapp/admin/manufacturer/get/'+id)
+        $http.get('/mywebapp/admin/category/get/'+id)
             .then(function(response){
                 $scope.old=response.data;
                 $scope.obj.name=$scope.old.name;
@@ -70,7 +70,7 @@ myApp.controller('manufacturerCtrl',function($scope,$http){
         $scope.error=false;
         $scope.old={};
         $scope.del={};
-        $scope.del.manufacturerId='';
+        $scope.del.categoryId='';
         $scope.del.name='';
     };
 
