@@ -1,8 +1,7 @@
 package com.webapp.controller;
 
 import com.webapp.model.entity.Category;
-import com.webapp.model.entity.Manufacturer;
-import com.webapp.service.ManufacturerService;
+import com.webapp.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

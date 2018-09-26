@@ -29,7 +29,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     }
 
     @Override
-    public Manufacturer getManufacturerById(Long id) {
+    public Manufacturer getManufacturerById(long id) {
         return manufacturerDao.getByKey(id);
     }
 
