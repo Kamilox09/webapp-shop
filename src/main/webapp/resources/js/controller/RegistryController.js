@@ -25,8 +25,10 @@ myApp.controller('registryCtrl',function($scope,$http){
                 .then(function (response) {
                     $scope.reset();
                     window.location='/mywebapp/login';
-                },
-                    failureCallback());
+                })
+                .catch(function(){
+                    failureCallback();
+                });
         }
     };
 

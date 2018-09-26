@@ -16,8 +16,9 @@ myApp.controller('manufacturerCtrl',function($scope,$http){
             .then(function(){
                 $scope.reset();
                 window.location.reload();
-            },
-                failureCallback())
+            })
+            .catch(function(){failureCallback();
+            })
     };
 
     $scope.setObjToDel = function(id,name){
@@ -31,8 +32,10 @@ myApp.controller('manufacturerCtrl',function($scope,$http){
             .then(function(){
                 $scope.reset();
                 window.location='/mywebapp/admin/manufacturer';
-            },
-                failureCallback())
+            })
+            .catch(function(){
+                failureCallback();
+            })
     };
 
     $scope.deleteManufacturer = function(){
