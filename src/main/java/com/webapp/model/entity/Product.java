@@ -1,6 +1,8 @@
 package com.webapp.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -32,18 +34,23 @@ public class Product {
     @Column(name="QUANTITY",nullable = false)
     private int quantity;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "product")
     private List<Photo> photoList;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "product")
     private List<PriceDate> priceDateList;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "product")
     private List<OrderLine> orderLineList;
 
+    @JsonIgnore
     @ManyToOne
     private Manufacturer manufacturer;
 
+    @JsonIgnore
     @ManyToOne
     private Category category;
 
