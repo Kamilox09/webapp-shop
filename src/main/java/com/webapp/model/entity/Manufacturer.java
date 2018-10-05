@@ -19,7 +19,7 @@ public class Manufacturer {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "manufacturer")
+    @OneToMany(mappedBy = "manufacturer", fetch = FetchType.LAZY)
     private List<Product> productList;
 
     public long getManufacturerId() {

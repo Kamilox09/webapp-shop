@@ -18,7 +18,7 @@ public class Product {
     @Size(min=1,max=64)
     private String name;
 
-    @Column(name="DESCRIPTION",nullable = false,columnDefinition = "LONG VARCHAR", length = 10000)
+    @Column(name="DESCRIPTION",nullable = false, length = 10000)
     @Size(min=1,max=10000)
     private String description;
 
@@ -46,12 +46,10 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<OrderLine> orderLineList;
 
-    @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Manufacturer manufacturer;
 
-    @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
 
     public long getProductId() {

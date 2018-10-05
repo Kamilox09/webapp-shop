@@ -1,0 +1,6 @@
+package com.webapp.dao;
+
+import com.webapp.model.entity.Product;
+
+public interface ProductDao extends IAbstractDao<Product> {
+}
