@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional
 @Service("productService")
 public class ProductServiceImpl implements ProductService {
@@ -21,9 +23,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getById(long id) {
-        Product product = productDao.getByKey(id);
-        product.getCategory();
-        product.getManufacturer();
-        return product;
+        return productDao.getByKey(id);
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        return productDao.getAll();
     }
 }

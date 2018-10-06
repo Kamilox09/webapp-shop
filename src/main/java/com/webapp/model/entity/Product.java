@@ -34,6 +34,9 @@ public class Product {
     @Column(name="QUANTITY",nullable = false)
     private int quantity;
 
+    @Column(name="ACTIVE", nullable = false)
+    private boolean active;
+
     @JsonIgnore
     @OneToMany(mappedBy = "product")
     private List<Photo> photoList;
@@ -106,6 +109,14 @@ public class Product {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public List<Photo> getPhotoList() {
