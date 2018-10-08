@@ -51,4 +51,9 @@ public class CategoryServiceImpl implements CategoryService {
     public void deleteCategoryById(long id) {
         categoryDao.deleteByKey(id);
     }
+
+    @Override
+    public Category getByName(String name) {
+        return categoryDao.getCategoryByName(name);
+    }
 }

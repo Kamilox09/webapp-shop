@@ -50,4 +50,9 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     public void deleteManufacturerById(long id) {
         manufacturerDao.deleteByKey(id);
     }
+
+    @Override
+    public Manufacturer getByName(String name) {
+        return manufacturerDao.getManufacturerByName(name);
+    }
 }

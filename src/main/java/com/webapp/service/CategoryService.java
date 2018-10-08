@@ -10,4 +10,5 @@ public interface CategoryService {
     Category getCategoryById(long id);
     Category updateCategory(Category category);
     void deleteCategoryById(long id);
+    Category getByName(String name);
 }

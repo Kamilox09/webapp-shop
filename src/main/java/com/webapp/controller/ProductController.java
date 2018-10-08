@@ -5,9 +5,7 @@ import com.webapp.model.entity.Product;
 import com.webapp.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -42,6 +40,12 @@ public class ProductController {
     @RequestMapping("/admin/product/add")
     public String getProductAddPage(){
         return "/admin/product/addProduct";
+    }
+
+    @RequestMapping(value = "/admin/product", method= RequestMethod.POST)
+    public @ResponseBody
+    Product addNewProduct(@RequestBody Product product){
+        return productService.addProduct(product);
     }
 
 }

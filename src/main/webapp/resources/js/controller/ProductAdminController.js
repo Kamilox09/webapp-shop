@@ -1,17 +1,17 @@
 //var myApp = angular.module('myApp',[]);
 angular.module('myApp').controller('productAdminCtrl',function($scope,$http){
-    $scope.obj={};
-    $scope.obj.name='';
-    $scope.obj.description='';
-    $scope.obj.netPrice=0.0;
-    $scope.obj.grossPrice=0.0;
-    $scope.obj.vat=0.0;
-    $scope.obj.quantity=0;
-    $scope.obj.active=true;
-    $scope.obj.manufacturer={};
-    $scope.obj.manufacturer.name='';
-    $scope.obj.category={};
-    $scope.obj.category.name='';
+    $scope.product={};
+    $scope.product.name='';
+    $scope.product.description='';
+    $scope.product.netPrice=0.0;
+    $scope.product.grossPrice=0.0;
+    $scope.product.vat=0.0;
+    $scope.product.quantity=0;
+    $scope.product.active=true;
+    $scope.product.manufacturer={};
+    $scope.product.manufacturer.name='';
+    $scope.product.category={};
+    $scope.product.category.name='';
     $scope.error=false;
     $scope.products={};
     $scope.old={};
@@ -21,8 +21,8 @@ angular.module('myApp').controller('productAdminCtrl',function($scope,$http){
         window.location='/mywebapp/admin/product/add'
     };
 
-    $scope.addProduct = function(obj){
-        $http.post('/mywebapp/admin/product',obj)
+    $scope.addProduct = function(product){
+        $http.post('/mywebapp/admin/product',product)
             .then(function(){
                 $scope.reset();
                 window.location='/mywebapp/admin/product';
@@ -32,9 +32,9 @@ angular.module('myApp').controller('productAdminCtrl',function($scope,$http){
     };
 
 
-    $scope.editProduct = function(obj){
-        $scope.obj.productId=$scope.old.productId;
-        $http.put('/mywebapp/admin/product',obj)
+    $scope.editProduct = function(product){
+        $scope.product.productId=$scope.old.productId;
+        $http.put('/mywebapp/admin/product',product)
             .then(function(){
                 $scope.reset();
                 window.location='/mywebapp/admin/product';
@@ -58,24 +58,24 @@ angular.module('myApp').controller('productAdminCtrl',function($scope,$http){
         $http.get('/mywebapp/admin/product/get/'+id)
             .then(function(response){
                 $scope.old=response.data;
-                $scope.obj.name=$scope.old.name;
+                $scope.product.name=$scope.old.name;
             })
 
     };
 
     $scope.reset=function(){
-        $scope.obj={};
-        $scope.obj.name='';
-        $scope.obj.description='';
-        $scope.obj.netPrice=0.0;
-        $scope.obj.grossPrice=0.0;
-        $scope.obj.vat=0.0;
-        $scope.obj.quantity=0;
-        $scope.obj.active=true;
-        $scope.obj.manufacturer={};
-        $scope.obj.manufacturer.name='';
-        $scope.obj.category={};
-        $scope.obj.category.name='';
+        $scope.product={};
+        $scope.product.name='';
+        $scope.product.description='';
+        $scope.product.netPrice=0.0;
+        $scope.product.grossPrice=0.0;
+        $scope.product.vat=0.0;
+        $scope.product.quantity=0;
+        $scope.product.active=true;
+        $scope.product.manufacturer={};
+        $scope.product.manufacturer.name='';
+        $scope.product.category={};
+        $scope.product.category.name='';
         $scope.error=false;
         $scope.old={};
 
