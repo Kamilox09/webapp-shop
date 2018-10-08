@@ -1,6 +1,6 @@
 
-var myApp = angular.module('myApp',[]);
-myApp.controller('loginCtrl', function($scope,$http){
+//var myApp = angular.module('myApp',[]);
+angular.module('myApp').controller('loginCtrl', function($scope,$http){
     $scope.credentials={};
     $scope.credentials.username='';
     $scope.credentials.password='';

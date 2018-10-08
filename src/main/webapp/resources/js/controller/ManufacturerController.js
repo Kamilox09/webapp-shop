@@ -1,5 +1,5 @@
-var myApp = angular.module('myApp',[]);
-myApp.controller('manufacturerCtrl',function($scope,$http){
+//var myApp = angular.module('myApp',[]);
+angular.module('myApp').controller('manufacturerCtrl',function($scope,$http){
     $scope.obj={};
     $scope.obj.name='';
     $scope.error=false;

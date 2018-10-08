@@ -1,6 +1,6 @@
 
-var myApp = angular.module('myApp',[]);
-myApp.controller('registryCtrl',function($scope,$http){
+//var myApp = angular.module('myApp',[]);
+angular.module('myApp').controller('registryCtrl',function($scope,$http){
     var areTheSame = false;
     $scope.acc={};
     $scope.acc.login='';

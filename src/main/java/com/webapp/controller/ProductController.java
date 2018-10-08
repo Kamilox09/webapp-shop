@@ -39,4 +39,9 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
+    @RequestMapping("/admin/product/add")
+    public String getProductAddPage(){
+        return "/admin/product/addProduct";
+    }
+
 }

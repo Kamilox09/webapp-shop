@@ -1,13 +1,25 @@
-var myApp = angular.module('myApp',[]);
-myApp.controller('productAdminCtrl',function($scope,$http){
+//var myApp = angular.module('myApp',[]);
+angular.module('myApp').controller('productAdminCtrl',function($scope,$http){
     $scope.obj={};
     $scope.obj.name='';
+    $scope.obj.description='';
+    $scope.obj.netPrice=0.0;
+    $scope.obj.grossPrice=0.0;
+    $scope.obj.vat=0.0;
+    $scope.obj.quantity=0;
+    $scope.obj.active=true;
+    $scope.obj.manufacturer={};
+    $scope.obj.manufacturer.name='';
+    $scope.obj.category={};
+    $scope.obj.category.name='';
     $scope.error=false;
     $scope.products={};
     $scope.old={};
 
 
-
+    $scope.getAddProductPage = function () {
+        window.location='/mywebapp/admin/product/add'
+    };
 
     $scope.addProduct = function(obj){
         $http.post('/mywebapp/admin/product',obj)
@@ -54,6 +66,16 @@ myApp.controller('productAdminCtrl',function($scope,$http){
     $scope.reset=function(){
         $scope.obj={};
         $scope.obj.name='';
+        $scope.obj.description='';
+        $scope.obj.netPrice=0.0;
+        $scope.obj.grossPrice=0.0;
+        $scope.obj.vat=0.0;
+        $scope.obj.quantity=0;
+        $scope.obj.active=true;
+        $scope.obj.manufacturer={};
+        $scope.obj.manufacturer.name='';
+        $scope.obj.category={};
+        $scope.obj.category.name='';
         $scope.error=false;
         $scope.old={};
 
