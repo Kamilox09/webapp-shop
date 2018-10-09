@@ -33,7 +33,7 @@ angular.module('myApp').controller('productAdminCtrl',function($scope,$http){
 
 
     $scope.editProduct = function(product){
-        $scope.product.productId=$scope.old.productId;
+        //$scope.product.productId=$scope.old.productId;
         $http.put('/mywebapp/admin/product',product)
             .then(function(){
                 $scope.reset();
@@ -58,7 +58,7 @@ angular.module('myApp').controller('productAdminCtrl',function($scope,$http){
         $http.get('/mywebapp/admin/product/get/'+id)
             .then(function(response){
                 $scope.old=response.data;
-                $scope.product.name=$scope.old.name;
+                $scope.product=$scope.old;
             })
 
     };

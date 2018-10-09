@@ -48,4 +48,9 @@ public class ProductController {
         return productService.addProduct(product);
     }
 
+    @RequestMapping("/admin/product/edit/{id}")
+    public String getEditPage(@PathVariable long id){
+        return "/admin/product/edit";
+    }
+
 }
