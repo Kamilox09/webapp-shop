@@ -53,4 +53,10 @@ public class ProductController {
         return "/admin/product/edit";
     }
 
+    @RequestMapping(value = "/admin/product", method = RequestMethod.PUT)
+    public @ResponseBody
+    Product editProduct(@RequestBody Product product){
+        return productService.editProduct(product);
+    }
+
 }

@@ -47,4 +47,11 @@ public class ProductServiceImpl implements ProductService {
         product.setCategory(categoryService.getByName(product.getCategory().getName()));
         return productDao.create(product);
     }
+
+    @Override
+    public Product editProduct(Product product) {
+        product.setManufacturer(manufacturerService.getByName(product.getManufacturer().getName()));
+        product.setCategory(categoryService.getByName(product.getCategory().getName()));
+        return productDao.update(product);
+    }
 }
