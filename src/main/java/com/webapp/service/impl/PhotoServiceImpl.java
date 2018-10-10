@@ -6,10 +6,17 @@ import com.webapp.model.entity.Photo;
 import com.webapp.model.entity.Product;
 import com.webapp.service.PhotoService;
 import com.webapp.service.ProductService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Timestamp;
 
+@Service("photoService")
+@Transactional
 public class PhotoServiceImpl implements PhotoService {
 
     private final PhotoDao photoDao;
@@ -26,6 +33,7 @@ public class PhotoServiceImpl implements PhotoService {
         Photo photo = new Photo();
         photo.setAddingDate(new Timestamp(System.currentTimeMillis()));
         photo.setFileName(product.getName());
+        photo.setProduct(product);
         photo = photoDao.create(photo);
         if(photo.getPhotoId()==0L)
             return null;
@@ -33,6 +41,8 @@ public class PhotoServiceImpl implements PhotoService {
         photo = photoDao.update(photo);
         if(photoDTO.getPhoto()!=null && !photoDTO.getPhoto().isEmpty()){
             try{
+                Path path = Paths.get(rootDirectory+"resources//images//"+product.getProductId()+"//"+photo.getFileName()+".png");
+                Files.createDirectories(path.getParent());
                 photoDTO.getPhoto().transferTo(new File(
                         rootDirectory+"resources//images//"+product.getProductId()+"//"+photo.getFileName()+".png"));
             }catch(Exception e){
