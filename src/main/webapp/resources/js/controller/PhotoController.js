@@ -1,5 +1,9 @@
 angular.module('myApp').controller('photoCtrl',function ($scope,$http) {
 
+    $scope.photos={};
+    $scope.productId='';
+    $scope.delId='';
+    $scope.error=false;
 
     $scope.sendPhoto = function(obj){
         var url = window.location.pathname;
@@ -13,12 +17,43 @@ angular.module('myApp').controller('photoCtrl',function ($scope,$http) {
                 $scope.reset();
                 window.location.reload();
             })
+            .catch(function(){
+                $scope.failureCallback();
+            })
     };
 
     $scope.reset=function(){
         $scope.photo={};
         $scope.photo.photo=null;
+        $scope.delId='';
+        $scope.error=false;
     };
+
+    $scope.getAllPhotos=function(){
+        var url = window.location.pathname;
+        $scope.productId=url.substring(url.lastIndexOf('/')+1);
+        $http.get('/mywebapp/admin/photos/'+$scope.productId)
+            .then(function(response){
+                $scope.photos=response.data;
+            })
+
+    };
+
+    $scope.setObjToDel=function(id){
+        $scope.delId=id;
+    };
+
+    $scope.deletePhoto=function(){
+        $http.delete('/mywebapp/admin/photo?id='+$scope.delId)
+            .then(function(){
+                $scope.reset();
+                window.location.reload();
+            })
+    };
+
+    $scope.failureCallback=function(){
+        $scope.error=true;
+    }
 });
 
 angular.module('myApp').directive('fileModel', ['$parse', function ($parse) {

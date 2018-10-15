@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Service("photoService")
 @Transactional
@@ -52,5 +53,18 @@ public class PhotoServiceImpl implements PhotoService {
         }
         photoDao.delete(photo);
         return null;
+    }
+
+    @Override
+    public List<Photo> getPhotosByProductId(long productId) {
+        return photoDao.getPhotosByProduct(productService.getById(productId));
+    }
+
+    @Override
+    public void deletePhoto(long photoId, String rootDirectory) {
+        Photo photo = photoDao.getByKey(photoId);
+        File file = new File(rootDirectory+"resources//images//"+photo.getProduct().getProductId()+"//"+photo.getFileName()+".png");
+        if(file.delete())
+            photoDao.delete(photo);
     }
 }
