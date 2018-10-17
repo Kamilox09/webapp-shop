@@ -6,4 +6,5 @@ import com.webapp.model.entity.Customer;
 public interface CustomerService {
     Customer getCustomerByUsername(String username);
     CustomerAddressDTO addNewCustomer(CustomerAddressDTO customerToAdd);
+    Customer editCustomer(Customer customer);
 }

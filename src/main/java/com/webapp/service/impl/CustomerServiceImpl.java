@@ -46,4 +46,9 @@ public class CustomerServiceImpl implements CustomerService {
         return new CustomerAddressDTO(customer,address);
 
     }
+
+    @Override
+    public Customer editCustomer(Customer customer) {
+        return customerDao.updateCustomer(customer);
+    }
 }

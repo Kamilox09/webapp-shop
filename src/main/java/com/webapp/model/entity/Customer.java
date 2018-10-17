@@ -1,5 +1,6 @@
 package com.webapp.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -48,10 +49,13 @@ public class Customer {
     @Column(name="ROLE", nullable = false)
     private String role;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "customer")
     private List<Cart> cartList;
 
-    @JsonManagedReference
+
+
+    @JsonIgnore
     @OneToMany(mappedBy = "customer")
     private List<Address> addressList;
 
@@ -79,6 +83,7 @@ public class Customer {
         this.login = login;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }

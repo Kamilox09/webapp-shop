@@ -21,4 +21,18 @@ public class CustomerDaoImpl extends AbstractDao<Customer> implements CustomerDa
         create(customer);
         return customer;
     }
+
+    @Override
+    public Customer updateCustomer(Customer customer) {
+        Query query = getSession().createQuery("update Customer set name=:name, surname=:surname, company=:company,phoneNumber=:phoneNumber,nip=:nip,regon=:regon where customerId=:customerId");
+        query.setParameter("name",customer.getName());
+        query.setParameter("surname",customer.getSurname());
+        query.setParameter("company",customer.getCompany());
+        query.setParameter("phoneNumber",customer.getPhoneNumber());
+        query.setParameter("nip",customer.getNip());
+        query.setParameter("regon",customer.getRegon());
+        query.setParameter("customerId",customer.getCustomerId());
+        query.executeUpdate();
+        return customer;
+    }
 }
