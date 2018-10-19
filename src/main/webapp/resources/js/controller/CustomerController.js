@@ -8,13 +8,13 @@ angular.module('myApp').controller('customerCtrl',function($scope,$http){
             .then(function(response){
                 $scope.customer=response.data;
             })
-    }
+    };
 
     $scope.editCustomer=function(obj){
         $http.put('/mywebapp/account',obj)
             .then(function(response){
                 window.location='/mywebapp/account/'+$scope.customer.login;
             })
-    }
+    };
 
 });

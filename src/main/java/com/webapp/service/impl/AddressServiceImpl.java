@@ -2,6 +2,7 @@ package com.webapp.service.impl;
 
 import com.webapp.dao.AddressDao;
 import com.webapp.model.entity.Address;
+import com.webapp.model.entity.Customer;
 import com.webapp.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,5 +23,10 @@ public class AddressServiceImpl implements AddressService {
     public Address addNewAddress(Address address) {
         return addressDao.addNewAddress(address);
 
+    }
+
+    @Override
+    public Address getCurrentAddressByCustomer(Customer customer) {
+        return addressDao.getCurrentAddressByCustomer(customer);
     }
 }

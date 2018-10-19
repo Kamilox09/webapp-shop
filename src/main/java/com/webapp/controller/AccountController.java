@@ -1,19 +1,23 @@
 package com.webapp.controller;
 
+import com.webapp.model.entity.Address;
 import com.webapp.model.entity.Customer;
+import com.webapp.service.AddressService;
 import com.webapp.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class CustomerController {
+public class AccountController {
 
     private final CustomerService customerService;
+    private final AddressService addressService;
 
     @Autowired
-    public CustomerController(CustomerService customerService){
+    public AccountController(CustomerService customerService, AddressService addressService){
         this.customerService=customerService;
+        this.addressService=addressService;
     }
 
     @RequestMapping("/account/{username}")
@@ -36,5 +40,16 @@ public class CustomerController {
     public @ResponseBody
     Customer editAccount(@RequestBody Customer customer){
         return customerService.editCustomer(customer);
+    }
+
+    @RequestMapping("/editaddress/{username}")
+    public String getEditAddressView(@PathVariable("username") String username){
+        return "/account/editaddress";
+    }
+
+    @RequestMapping("/address/get/{username}")
+    public @ResponseBody
+    Address getAddressByUsername(@PathVariable("username") String username){
+        return addressService.getCurrentAddressByCustomer(customerService.getCustomerByUsername(username));
     }
 }
