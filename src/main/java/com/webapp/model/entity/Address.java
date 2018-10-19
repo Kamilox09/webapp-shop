@@ -30,8 +30,8 @@ public class Address {
     @Column(name="TO_DATE")
     private Timestamp toDate;
 
-    @JsonBackReference
-    @ManyToOne
+    //@JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
     private Customer customer;
 
     public long getAddressId() {

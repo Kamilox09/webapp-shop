@@ -52,4 +52,10 @@ public class AccountController {
     Address getAddressByUsername(@PathVariable("username") String username){
         return addressService.getCurrentAddressByCustomer(customerService.getCustomerByUsername(username));
     }
+
+    @RequestMapping(value = "/address",method = RequestMethod.PUT)
+    public @ResponseBody
+    Address editAddress(@RequestBody Address address){
+        return addressService.updateAddress(address);
+    }
 }

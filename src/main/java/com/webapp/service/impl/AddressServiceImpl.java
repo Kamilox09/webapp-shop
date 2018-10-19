@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
+
 @Service("addressService")
 @Transactional
 public class AddressServiceImpl implements AddressService {
@@ -28,5 +30,15 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public Address getCurrentAddressByCustomer(Customer customer) {
         return addressDao.getCurrentAddressByCustomer(customer);
+    }
+
+    @Override
+    public Address updateAddress(Address address) {
+        Address old = getCurrentAddressByCustomer(address.getCustomer());
+        Timestamp newDate = new Timestamp(System.currentTimeMillis());
+        old.setToDate(newDate);
+        old=addressDao.update(old);
+        address.setFromDate(newDate);
+        return addressDao.addNewAddress(address);
     }
 }
