@@ -1,5 +1,6 @@
 angular.module('myApp').controller('customerCtrl',function($scope,$http){
     $scope.customer={};
+    $scope.username='';
 
     $scope.getCustomerDetails=function () {
         var url = window.location.pathname;
@@ -16,5 +17,10 @@ angular.module('myApp').controller('customerCtrl',function($scope,$http){
                 window.location='/mywebapp/account/'+$scope.customer.login;
             })
     };
+
+    $scope.getUsername=function(){
+        var url = window.location.pathname;
+        $scope.username=url.substring(url.lastIndexOf('/')+1);
+    }
 
 });

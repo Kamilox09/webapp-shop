@@ -58,4 +58,9 @@ public class AccountController {
     Address editAddress(@RequestBody Address address){
         return addressService.updateAddress(address);
     }
+
+    @RequestMapping("/changepassword/{username}")
+    public String getChangePasswordPage(@PathVariable("username") String username){
+        return "/account/changepassword";
+    }
 }
