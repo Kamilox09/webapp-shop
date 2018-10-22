@@ -35,4 +35,6 @@ public class CustomerDaoImpl extends AbstractDao<Customer> implements CustomerDa
         query.executeUpdate();
         return customer;
     }
+
+
 }

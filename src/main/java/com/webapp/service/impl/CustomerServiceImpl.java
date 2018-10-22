@@ -51,4 +51,16 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer editCustomer(Customer customer) {
         return customerDao.updateCustomer(customer);
     }
+
+    @Override
+    public Customer changePassword(String username, String oldPassword, String newPassword) {
+        Customer customer = customerDao.getCustomerByUsername(username);
+        if(customer==null)
+            return null;
+        if(oldPassword.equals(customer.getPassword())){
+            customer.setPassword(newPassword);
+            return customerDao.update(customer);
+        }
+        return null;
+    }
 }

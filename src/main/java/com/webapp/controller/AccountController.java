@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.util.Properties;
+
 @Controller
 public class AccountController {
 
@@ -62,5 +65,14 @@ public class AccountController {
     @RequestMapping("/changepassword/{username}")
     public String getChangePasswordPage(@PathVariable("username") String username){
         return "/account/changepassword";
+    }
+
+    @RequestMapping(value = "/changepassword/{username}", method = RequestMethod.PUT)
+    public @ResponseBody
+    Customer changePassword(@PathVariable("username") String username, @RequestBody Properties properties, HttpServletResponse response){
+        Customer customer = customerService.changePassword(username,properties.getProperty("old"),properties.getProperty("new"));
+        if(customer==null)
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        return customer;
     }
 }

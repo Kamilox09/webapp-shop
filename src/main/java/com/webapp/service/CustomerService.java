@@ -7,4 +7,5 @@ public interface CustomerService {
     Customer getCustomerByUsername(String username);
     CustomerAddressDTO addNewCustomer(CustomerAddressDTO customerToAdd);
     Customer editCustomer(Customer customer);
+    Customer changePassword(String username, String oldPassword, String newPassword);
 }
