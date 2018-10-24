@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 @Controller
@@ -57,6 +58,19 @@ public class ProductController {
     public @ResponseBody
     Product editProduct(@RequestBody Product product){
         return productService.editProduct(product);
+    }
+
+
+    @RequestMapping("/productcount")
+    public @ResponseBody
+    long getCountOfAllProducts(){
+        return productService.getCountOfActiveProducts();
+    }
+
+    @RequestMapping("/productcount/{category}")
+    public @ResponseBody
+    long getCountOffProductsByCategory(@PathVariable("category") String categoryName){
+        return productService.getCountOfActiveProductsByCategory(categoryName);
     }
 
 }

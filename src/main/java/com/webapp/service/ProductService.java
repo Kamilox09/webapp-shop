@@ -9,4 +9,6 @@ public interface ProductService {
     List<Product> getAllProducts();
     Product addProduct(Product product);
     Product editProduct(Product product);
+    long getCountOfActiveProducts();
+    long getCountOfActiveProductsByCategory(String categoryName);
 }

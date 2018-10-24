@@ -54,4 +54,14 @@ public class ProductServiceImpl implements ProductService {
         product.setCategory(categoryService.getByName(product.getCategory().getName()));
         return productDao.update(product);
     }
+
+    @Override
+    public long getCountOfActiveProducts() {
+        return productDao.getCountOfActiveProducts();
+    }
+
+    @Override
+    public long getCountOfActiveProductsByCategory(String categoryName) {
+        return productDao.getCountOfActiveProductsByCategory(categoryService.getByName(categoryName));
+    }
 }
