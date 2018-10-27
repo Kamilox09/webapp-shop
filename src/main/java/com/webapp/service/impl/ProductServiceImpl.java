@@ -64,4 +64,9 @@ public class ProductServiceImpl implements ProductService {
     public long getCountOfActiveProductsByCategory(String categoryName) {
         return productDao.getCountOfActiveProductsByCategory(categoryService.getByName(categoryName));
     }
+
+    @Override
+    public List<Product> getProductsForPage(long page, String categoryName) {
+        return productDao.getProductsForPage(page,categoryService.getByName(categoryName));
+    }
 }

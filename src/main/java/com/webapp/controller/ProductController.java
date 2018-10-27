@@ -73,4 +73,13 @@ public class ProductController {
         return productService.getCountOfActiveProductsByCategory(categoryName);
     }
 
+    @RequestMapping(value = "/products/get",params = {"page"})
+    public @ResponseBody
+    List<Product> getProductsForPage(@RequestParam(required = false,value = "page") long page){
+        return productService.getProductsForPage(page,"");
+    }
+
+
+
+
 }

@@ -11,4 +11,5 @@ public interface ProductService {
     Product editProduct(Product product);
     long getCountOfActiveProducts();
     long getCountOfActiveProductsByCategory(String categoryName);
+    List<Product> getProductsForPage(long page, String categoryName);
 }
