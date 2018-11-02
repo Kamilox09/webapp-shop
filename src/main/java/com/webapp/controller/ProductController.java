@@ -4,6 +4,8 @@ package com.webapp.controller;
 import com.webapp.model.entity.Product;
 import com.webapp.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -75,8 +77,14 @@ public class ProductController {
 
     @RequestMapping(value = "/products/get",params = {"page"})
     public @ResponseBody
-    List<Product> getProductsForPage(@RequestParam(required = false,value = "page") long page){
-        return productService.getProductsForPage(page,"");
+    List<Product> getProductsForPage(@RequestParam(value = "page") long page,
+                                      @RequestParam(required = false,value = "category") String categoryName){
+        return productService.getProductsForPage(page,categoryName);
+    }
+
+    @RequestMapping("/products")
+    public String getProductsView(){
+        return "/product/products";
     }
 
 

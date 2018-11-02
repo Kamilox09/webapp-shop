@@ -37,8 +37,8 @@ public class Product {
     @Column(name="ACTIVE", nullable = false)
     private boolean active;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "product")
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
     private List<Photo> photoList;
 
     @JsonIgnore

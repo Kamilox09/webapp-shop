@@ -1,6 +1,8 @@
 package com.webapp.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
@@ -19,6 +21,7 @@ public class Photo {
     @Column(name="ADDING_DATE",nullable = false)
     private Timestamp addingDate;
 
+    @JsonIgnore
     @ManyToOne
     private Product product;
 

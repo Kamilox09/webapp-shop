@@ -2,15 +2,20 @@ package com.webapp.service.impl;
 
 
 import com.webapp.dao.ProductDao;
+import com.webapp.model.entity.Photo;
 import com.webapp.model.entity.Product;
 import com.webapp.service.CategoryService;
 import com.webapp.service.ManufacturerService;
+
 import com.webapp.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import java.util.ArrayList;
 import java.util.List;
+
 
 @Transactional
 @Service("productService")
@@ -21,6 +26,7 @@ public class ProductServiceImpl implements ProductService {
     private final ManufacturerService manufacturerService;
 
     private final CategoryService categoryService;
+
 
     @Autowired
     public ProductServiceImpl(ProductDao productDao,
@@ -67,6 +73,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getProductsForPage(long page, String categoryName) {
-        return productDao.getProductsForPage(page,categoryService.getByName(categoryName));
+        List<Product> products = productDao.getProductsForPage(page,categoryService.getByName(categoryName));
+        for(Product product : products){
+            if(!product.getPhotoList().isEmpty()){
+                List<Photo> photos=new ArrayList<Photo>();
+                photos.add(product.getPhotoList().get(0));
+                product.setPhotoList(photos);
+            }
+        }
+
+        return products;
     }
 }

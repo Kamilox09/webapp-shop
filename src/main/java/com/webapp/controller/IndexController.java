@@ -9,6 +9,6 @@ public class IndexController {
 
     @RequestMapping(value="/")
     public String getIndexPage(){
-        return "index";
+        return "redirect:/products";
     }
 }
