@@ -1,4 +1,4 @@
-angular.module('myApp').controller('productCtrl',function($scope,$http) {
+angular.module('myApp').controller('productCtrl',function($scope,$http,$location) {
 
     $scope.products={};
     $scope.page=1;
@@ -6,6 +6,24 @@ angular.module('myApp').controller('productCtrl',function($scope,$http) {
     $scope.categoryName="";
     $scope.amountOfPages=0;
     $scope.newPage='';
+    $scope.productDetail={};
+    $scope.productDetailPhotos=[];
+    $scope.ifPhoto=false;
+    $scope.firstPhoto={};
+    $scope.logged=false;
+
+
+    $scope.getUser=function () {
+        $http.get('/mywebapp/sessiondetails')
+            .then(function(response){
+                var username=response.data.username;
+                if(username!==""){
+                    $scope.logged=true;
+                }else{
+                    $scope.logged=false;
+                }
+            })
+    };
 
 
     $scope.getAmountOfProducts=function(){
@@ -26,6 +44,7 @@ angular.module('myApp').controller('productCtrl',function($scope,$http) {
     };
 
     $scope.getPageOfProducts=function(){
+        $scope.setCategory();
         $scope.getAmountOfProducts();
         //countAmountOfPages();
         if($scope.categoryName==="") {
@@ -41,12 +60,13 @@ angular.module('myApp').controller('productCtrl',function($scope,$http) {
         }
     };
 
-    $scope.setCategory=function(name){
-        if(window.location.pathname!== '/mywebapp/products')
-            window.location='/mywebapp/products';
+    $scope.setCategory=function(){
+        var loc=location.search;
+        var name=loc.substring(loc.lastIndexOf('=')+1);
         $scope.categoryName=name;
         $scope.products={};
-        $scope.getPageOfProducts();
+        //console.log(name);
+        //$scope.getPageOfProducts();
 
     };
 
@@ -66,6 +86,27 @@ angular.module('myApp').controller('productCtrl',function($scope,$http) {
            $scope.getPageOfProducts();
        }
      };
+
+     $scope.getProduct = function(){
+         var url=window.location.pathname;
+         var prId = url.substring(url.lastIndexOf('/')+1);
+        $http.get('/mywebapp/product/get/'+prId)
+            .then(function(response){
+                $scope.productDetailPhotos=[];
+                $scope.firstPhoto=[];
+                $scope.productDetail=response.data;
+                $scope.productDetailPhotos=Object.create(response.data.photoList);
+                $scope.productDetailPhotos.length===0?$scope.ifPhoto=false:$scope.ifPhoto=true;
+                if($scope.ifPhoto){
+                    $scope.firstPhoto=$scope.productDetailPhotos.splice(0,1);
+                }
+
+            })
+     };
+
+
+
+
 
 
 

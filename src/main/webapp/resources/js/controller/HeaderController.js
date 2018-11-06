@@ -12,7 +12,11 @@ angular.module('myApp').controller('headerCtrl',function($scope,$http){
                     $scope.logged=false;
                 }
             })
-    }
+    };
+
+
+
+
 
 
 

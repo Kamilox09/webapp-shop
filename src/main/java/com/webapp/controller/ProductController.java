@@ -87,7 +87,16 @@ public class ProductController {
         return "/product/products";
     }
 
+    @RequestMapping("/product/{id}")
+    public String getProductDetailsView(@PathVariable("id") long id){
+        return "/product/productdetail";
+    }
 
+    @RequestMapping("/product/get/{id}")
+    public @ResponseBody
+    Product getProductDetailById(@PathVariable("id") long id){
+        return productService.getById(id);
+    }
 
 
 }
