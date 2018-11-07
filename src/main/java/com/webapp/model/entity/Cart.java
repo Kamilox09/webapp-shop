@@ -1,6 +1,8 @@
 package com.webapp.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -24,6 +26,7 @@ public class Cart {
     @Column(name="PURCHASE_DATE")
     private Timestamp purchaseDate;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cart")
     private List<OrderLine> orderLineList;
 

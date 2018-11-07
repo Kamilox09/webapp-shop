@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CartDaoImpl extends AbstractDao<Cart> implements CartDao  {
     @Override
     public Cart checkIfExist(Customer customer) {
-        Query query = getSession().createQuery("from Cart where Customer =:customer and purchaseDate is null");
+        Query query = getSession().createQuery("from Cart where customer =:customer and purchaseDate is null");
         query.setParameter("customer",customer);
         return (Cart)query.uniqueResult();
     }
