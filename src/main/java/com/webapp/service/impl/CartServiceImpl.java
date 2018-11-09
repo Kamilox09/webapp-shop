@@ -86,7 +86,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public List<OrderLine> getOrderLinesByCartId(long cartId) {
-        return getOrderLinesByCartId(cartId);
+        return orderLineDao.getOrderLinesByCartId(cartId);
     }
 
     @Override

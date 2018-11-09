@@ -11,6 +11,9 @@ angular.module('myApp').controller('productCtrl',function($scope,$http,$location
     $scope.ifPhoto=false;
     $scope.firstPhoto={};
     $scope.logged=false;
+    $scope.productQuantity=1;
+    $scope.added=false;
+    $scope.error=false;
 
 
     $scope.getUser=function () {
@@ -101,6 +104,22 @@ angular.module('myApp').controller('productCtrl',function($scope,$http,$location
                     $scope.firstPhoto=$scope.productDetailPhotos.splice(0,1);
                 }
 
+            })
+     };
+
+     $scope.addToCart = function (prodQuantity) {
+         $scope.added=false;
+         $scope.error=false;
+        var obj = {};
+        obj.productId = $scope.productDetail.productId;
+        obj.quantity=prodQuantity;
+        console.log(obj.quantity);
+        $http.post('/mywebapp/additem',obj)
+            .then(function(){
+                $scope.added=true;
+            })
+            .catch(function () {
+                $scope.error=true;
             })
      };
 
