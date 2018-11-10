@@ -1,6 +1,7 @@
 package com.webapp.controller;
 
 
+
 import com.webapp.model.CartNewItemDTO;
 import com.webapp.model.entity.Cart;
 import com.webapp.model.entity.OrderLine;
@@ -54,6 +55,15 @@ public class CartController {
     OrderLine addProductToCart(@RequestBody CartNewItemDTO newItem, Principal principal,
                                HttpServletResponse response){
         OrderLine returned = cartService.addItemToCart(newItem, principal.getName());
+        if(returned==null)
+            response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+        return returned;
+    }
+
+    @RequestMapping(value = "/updateitem", method = RequestMethod.PUT)
+    public @ResponseBody
+    OrderLine updateOrderLine(@RequestBody OrderLine orderLine, HttpServletResponse response){
+        OrderLine returned = cartService.updateOrderLine(orderLine);
         if(returned==null)
             response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
         return returned;

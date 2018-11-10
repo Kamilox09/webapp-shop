@@ -12,4 +12,5 @@ public interface CartService {
     double countCartTotalPrice(Cart cart);
     List<OrderLine> getOrderLinesByCartId(long cartId);
     void deleteOrderLineById(long orderLineId);
+    OrderLine updateOrderLine(OrderLine orderLine);
 }

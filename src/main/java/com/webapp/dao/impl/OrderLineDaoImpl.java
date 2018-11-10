@@ -27,4 +27,12 @@ public class OrderLineDaoImpl extends AbstractDao<OrderLine> implements OrderLin
         query.setParameter("cartId",cartId);
         return query.list();
     }
+
+    @Override
+    public OrderLine getOrderLineByProductIdAndCartId(long productId, long cartId) {
+        Query query = getSession().createQuery("from OrderLine where product.productId=:productId and cart.cartId=:cartId");
+        query.setParameter("productId",productId);
+        query.setParameter("cartId",cartId);
+        return (OrderLine)query.uniqueResult();
+    }
 }

@@ -1,6 +1,7 @@
 angular.module('myApp').controller('cartCtrl',function($scope,$http) {
     $scope.lines = {};
     $scope.cart={};
+    $scope.error=false;
 
 
     $scope.checkCartAndGetLines = function () {
@@ -18,15 +19,27 @@ angular.module('myApp').controller('cartCtrl',function($scope,$http) {
     $scope.deleteOrderLine = function(id){
       $http.delete('/mywebapp/cart?id='+id)
           .then(function(){
-              var i,ind;
+             /* var i,ind;
               for(i=0;$scope.lines.length;i++){
                 if($scope.lines[i].orderLineId===id){
                     ind=i;
                     break;
                 }
               }
-              $scope.lines.splice(ind,1);
+              $scope.lines.splice(ind,1);*/
+              $scope.checkCartAndGetLines();
           })
+    };
+
+    $scope.updateOrderLine = function(obj){
+        $scope.error=false;
+        $http.put('/mywebapp/updateitem',obj)
+            .then(function(){
+                $scope.checkCartAndGetLines();
+            })
+            .catch(function(){
+                $scope.error=true;
+            })
     };
 
 

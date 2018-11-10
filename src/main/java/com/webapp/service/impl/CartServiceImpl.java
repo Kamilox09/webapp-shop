@@ -59,17 +59,29 @@ public class CartServiceImpl implements CartService {
         Product product = productService.getById(cartNewItemDTO.getProductId());
         if(product.getQuantity()<cartNewItemDTO.getQuantity())
             return null;
-        OrderLine orderLine = new OrderLine();
         Cart cart = this.checkIfExistAddIfNot(username);
-        orderLine.setCart(cart);
-        orderLine.setProduct(product);
-        orderLine.setQuantity((int)cartNewItemDTO.getQuantity());
-        orderLine.setGrossPricePerItem(product.getGrossPrice());
-        orderLine.setNetPricePerItem(product.getNetPrice());
-        orderLine.setVat(product.getVat());
-        orderLine=orderLineDao.create(orderLine);
-        cart.setTotalPrice(countCartTotalPrice(cart));
-        cartDao.update(cart);
+        OrderLine orderLine = orderLineDao.getOrderLineByProductIdAndCartId(cartNewItemDTO.getProductId(),
+               cart.getCartId() );
+        if(orderLine==null) {
+            orderLine = new OrderLine();
+            orderLine.setCart(cart);
+            orderLine.setProduct(product);
+            orderLine.setQuantity((int) cartNewItemDTO.getQuantity());
+            orderLine.setGrossPricePerItem(product.getGrossPrice());
+            orderLine.setNetPricePerItem(product.getNetPrice());
+            orderLine.setVat(product.getVat());
+            orderLine = orderLineDao.create(orderLine);
+            cart.setTotalPrice(countCartTotalPrice(cart));
+            cartDao.update(cart);
+        }else{
+            if(product.getQuantity()<(orderLine.getQuantity()+(int)cartNewItemDTO.getQuantity()))
+                return null;
+            orderLine.setQuantity(orderLine.getQuantity()+(int)cartNewItemDTO.getQuantity());
+            orderLine = orderLineDao.update(orderLine);
+            cart.setTotalPrice(countCartTotalPrice(cart));
+            cartDao.update(cart);
+
+        }
 
         return orderLine;
     }
@@ -96,5 +108,17 @@ public class CartServiceImpl implements CartService {
         orderLineDao.deleteByKey(orderLineId);
         cart.setTotalPrice(countCartTotalPrice(cart));
         cartDao.update(cart);
+    }
+
+    @Override
+    public OrderLine updateOrderLine(OrderLine orderLine) {
+        if(orderLine.getQuantity()>orderLine.getProduct().getQuantity()){
+            return null;
+        }
+        OrderLine updated =orderLineDao.update(orderLine);
+        Cart cart = updated.getCart();
+        cart.setTotalPrice(countCartTotalPrice(updated.getCart()));
+        cartDao.update(cart);
+        return updated;
     }
 }
