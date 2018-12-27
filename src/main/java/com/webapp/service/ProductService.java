@@ -13,4 +13,5 @@ public interface ProductService {
     long getCountOfActiveProducts();
     long getCountOfActiveProductsByCategory(String categoryName);
     List<Product> getProductsForPage(long page, String categoryName);
+    void sellProducts(long id, int soldAmount);
 }

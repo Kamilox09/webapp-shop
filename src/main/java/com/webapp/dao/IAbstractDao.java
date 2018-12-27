@@ -9,5 +9,7 @@ public interface IAbstractDao<T> {
      T getByKey(long id);
      List<T> getAll();
      void deleteByKey(long id);
+     void flushSession();
+     void clearSession();
 
 }

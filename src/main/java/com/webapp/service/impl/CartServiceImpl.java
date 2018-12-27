@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.List;
 
@@ -118,7 +119,26 @@ public class CartServiceImpl implements CartService {
         OrderLine updated =orderLineDao.update(orderLine);
         Cart cart = updated.getCart();
         cart.setTotalPrice(countCartTotalPrice(updated.getCart()));
+        orderLineDao.flushSession();
+        cartDao.flushSession();
+        cartDao.clearSession();
         cartDao.update(cart);
         return updated;
+    }
+
+    @Override
+    public Cart buy(String username) {
+        Customer customer = customerService.getCustomerByUsername(username);
+        Cart cart = cartDao.checkIfExist(customer);
+        List<OrderLine> orderLines = this.getOrderLinesByCartId(cart.getCartId());
+
+        for (OrderLine orderLine : orderLines) {
+            productService.sellProducts(orderLine.getProduct().getProductId(),orderLine.getQuantity());
+        }
+
+        cart.setPurchaseDate(new Timestamp(System.currentTimeMillis()));
+        cart.setDispatchDate(new Timestamp(System.currentTimeMillis()));
+        cartDao.update(cart);
+        return this.checkIfExistAddIfNot(username);
     }
 }

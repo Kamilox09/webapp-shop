@@ -50,4 +50,12 @@ public abstract class AbstractDao<T> implements IAbstractDao<T> {
         delete(getByKey(id));
     }
 
+    public void flushSession(){
+        getSession().flush();
+    }
+
+    public void clearSession(){
+        getSession().clear();
+    }
+
 }

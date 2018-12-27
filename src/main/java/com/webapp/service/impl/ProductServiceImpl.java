@@ -84,4 +84,11 @@ public class ProductServiceImpl implements ProductService {
 
         return products;
     }
+
+    @Override
+    public void sellProducts(long id, int soldAmount) {
+        Product product = getById(id);
+        product.setQuantity(product.getQuantity()-soldAmount);
+        productDao.update(product);
+    }
 }

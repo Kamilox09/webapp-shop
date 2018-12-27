@@ -13,4 +13,5 @@ public interface CartService {
     List<OrderLine> getOrderLinesByCartId(long cartId);
     void deleteOrderLineById(long orderLineId);
     OrderLine updateOrderLine(OrderLine orderLine);
+    Cart buy(String username);
 }

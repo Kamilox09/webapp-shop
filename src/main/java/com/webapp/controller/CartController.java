@@ -2,6 +2,7 @@ package com.webapp.controller;
 
 
 
+
 import com.webapp.model.CartNewItemDTO;
 import com.webapp.model.entity.Cart;
 import com.webapp.model.entity.OrderLine;
@@ -68,6 +69,13 @@ public class CartController {
             response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
         return returned;
     }
+
+    @RequestMapping(value = "/cart/buy")
+    public Cart buy(Principal principal){
+        return cartService.buy(principal.getName());
+    }
+
+
 
 
 

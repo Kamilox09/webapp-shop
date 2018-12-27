@@ -20,7 +20,7 @@ public class UserDetailsImpl implements UserDetails {
         GrantedAuthority authority = new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                return customer.getRole();
+                return "ROLE_"+customer.getRole();
             }
         };
         ArrayList<GrantedAuthority> authorities = new ArrayList<>();

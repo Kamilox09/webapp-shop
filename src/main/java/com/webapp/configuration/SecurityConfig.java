@@ -40,10 +40,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/resources/**","/webjars/**","/sessiondetails/**")
-                .permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/login**","/registry**","/register**")
                 .anonymous()
+                .antMatchers("/resources/**","/webjars/**","/sessiondetails/**")
+                .permitAll()
+
+
                 .anyRequest()//.permitAll()
                 .authenticated()
             .and()

@@ -33,13 +33,25 @@ angular.module('myApp').controller('cartCtrl',function($scope,$http) {
 
     $scope.updateOrderLine = function(obj){
         $scope.error=false;
-        $http.put('/mywebapp/updateitem',obj)
-            .then(function(){
-                $scope.checkCartAndGetLines();
-            })
-            .catch(function(){
-                $scope.error=true;
-            })
+        if(obj.quantity<=obj.product.quantity && obj.quantity>0) {
+            $http.put('/mywebapp/updateitem', obj)
+                .then(function () {
+                    $scope.checkCartAndGetLines();
+                })
+                .catch(function () {
+                    $scope.error = true;
+                })
+        }else if(obj.quantity>obj.product.quantity){
+            obj.quantity=obj.product.quantity;
+        } else if(obj.quantity<=0){
+            obj.quantity=1;
+        }
+    };
+
+    $scope.pressBuy = function(){
+        $http.get('/mywebapp/cart/buy');
+        window.location='/mywebapp/cart'
+
     };
 
 
